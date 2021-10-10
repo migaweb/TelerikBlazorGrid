@@ -1,0 +1,23 @@
+﻿
+<div style="background-color: gray">
+    @if (NewCount.HasValue)
+    {
+        <div style="color: lightgreen">
+            New: @NewCount
+        </div>
+    }
+
+    @if (ModifiedCount.HasValue)
+    {
+        <div style="color: lightyellow">
+            Modified: @ModifiedCount
+        </div>
+    }
+
+    @if (DeletedCount.HasValue)
+    {
+        <div style="color: lightcoral">
+            Deleted: @DeletedCount
+        </div>
+    }
+</div>

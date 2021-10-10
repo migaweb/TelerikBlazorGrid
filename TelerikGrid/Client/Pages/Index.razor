@@ -1,0 +1,141 @@
+﻿@using TelerikGrid.Shared;
+@page "/"
+
+<style>
+    .highlightYellow {
+        background-color: lightyellow !important;
+        font-weight: bold;
+    }
+
+    .highlightRed {
+        background-color: lightcoral !important;
+        text-decoration: line-through;
+        font-weight: bold;
+    }
+
+    .highlightGreen {
+        background-color: lightgreen !important;
+        font-weight: bold;
+    }
+    /* To center all haders use Class prop on TelerikGrid */
+    .centered-header-grid .k-cell-inner > .k-link {
+        justify-content: right;
+    }
+
+</style>
+
+<TelerikGrid Data="@Persons"
+             ScrollMode="@GridScrollMode.Virtual"
+             Height="580px" RowHeight="40" PageSize="40"
+             Sortable="true"
+             Resizable="true"
+             EditMode="@GridEditMode.Inline"
+             OnUpdate="@UpdateHandler"
+             OnEdit="@EditHandler"
+             OnDelete="@DeleteHandler"
+             OnCreate="@CreateHandler"
+             OnCancel="@CancelHandler"
+             OnRowRender="@OnRowRenderHandler"
+             @ref="@GridRef"
+             >
+    <GridToolBar>
+        <div style="width: 100%;display: flex;justify-content:space-between;">
+            <div>
+                <GridCommandButton Command="Add"
+                                   Icon="add"
+                                   OnClick="@StartInsert"
+                                   >
+                    Add Person
+                </GridCommandButton>
+            </div>
+            <div style="display:flex">
+                <Select TValue="string" @onchange="StateFilterChanged" style="margin-right:10px;">
+                    <option value="All">(All)</option>
+                    <option value="New">New</option>
+                    <option value="Modified">Modified</option>
+                    <option value="Deleted">Deleted</option>
+                </Select>
+                
+                <Input @oninput="SearchTextChanged" placeholder="Search" style="display: flex;" />
+            </div>
+        </div>
+    </GridToolBar>
+
+    <GridColumns>
+        <GridColumn Field="@(nameof(Person.Id))"
+                    Title="Id"
+                    Width="100px"
+                    TextAlign="ColumnTextAlign.Right">
+            <HeaderTemplate>
+                <div style="text-align: right">
+                    Id
+                </div>
+            </HeaderTemplate>
+            <EditorTemplate>
+                @{
+                    CurrentlyEditedPerson = context as Person;
+                    if (CurrentlyEditedPerson.State == UIState.ToBeInserted)
+                    {
+                        <TelerikNumericTextBox @bind-Value="@CurrentlyEditedPerson.Id"
+                                               Min="301"
+                                               Id="person_id"
+                                               OnChange="@IdChanged">
+                        </TelerikNumericTextBox>
+                        <TelerikValidationTooltip For="@(() => CurrentlyEditedPerson.Id)"
+                                                  TargetSelector="#person_id"
+                                                  Position="TooltipPosition.Bottom" />
+                    }
+                    else
+                    {
+                        <div style="text-align:right">
+                            <text>@(CurrentlyEditedPerson.Id)</text>
+                        </div>
+                    }
+                }
+            </EditorTemplate>
+        </GridColumn>
+        <GridColumn Field="@(nameof(Person.Name))" Title="Name" />
+        <GridColumn Field="@(nameof(Person.Age))" 
+                    Title="Age" 
+                    Width="100px"
+                    TextAlign="ColumnTextAlign.Right"
+                    />
+        <GridColumn Field="@(nameof(Person.IsMarried))" Title="Status">
+            <Template Context="context">
+                @{
+                    var person = context as Person;
+                    var status = person.IsMarried ? "Married" : "Single";
+                    <text>@status</text>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field="@(nameof(Person.Pet))" Title="Pet" />
+
+        <GridCommandColumn Context="context" Width="100px">
+            @{
+                var person = context as Person;
+            }
+            <GridCommandButton Command="Save"
+                               Icon="save"
+                               ShowInEdit="true">
+            </GridCommandButton>
+                <GridCommandButton Command="Edit"
+                                   Icon="edit"
+                                   Enabled="@(person.State != UIState.Deleted)"
+                                   >
+                </GridCommandButton>
+            <GridCommandButton Command="Delete"
+                               Icon="delete"
+                               Enabled="@(person.Age >= 50 && person.State != UIState.Deleted)">
+            </GridCommandButton>
+            <GridCommandButton Command="Cancel"
+                               Icon="cancel"
+                               ShowInEdit="true"
+                               ></GridCommandButton>
+        </GridCommandColumn>
+
+    </GridColumns>
+
+</TelerikGrid>
+
+<RegistrySummary />

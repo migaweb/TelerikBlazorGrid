@@ -14,7 +14,7 @@ Testing the Blazor UI Grid inline editing for evaluation purposes.
         CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
         CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
         
-* Right align a column header, on a numeric column, is way too tricky when not aligning every column in the grid. Requires a HeaderTemplate. The TextAlign property only affects the cells, not the header. __Not working__ example below. 
+* Right align a column header, on a numeric column, is way too tricky when not aligning every column in the grid. Requires a HeaderTemplate. The TextAlign property only affects the cells, not the header. __Non working__ example below. 
         
         <GridColumn Field="@(nameof(Person.Id))"
                     Title="Id"

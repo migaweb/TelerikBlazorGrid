@@ -27,7 +27,7 @@ Testing the Blazor UI Grid inline editing for evaluation purposes.
             </HeaderTemplate>
         
 * Seems a bit laggy, probably due to the animations on Telerik components.
-* Custom validation, e.g. calling a server method to check for an existing id, email taken etc. [Custom validation Telerik Forum](https://feedback.telerik.com/blazor/1447439-is-there-a-way-to-implement-custom-validation-in-a-blazor-telerik-grid-when-pressing-save-update-command-button-if-not-is-there-plans-on-providing-custom-validation-as-a-feature-in-the-near-future) [Cliff](https://en.wikipedia.org/wiki/Cliff_Barnes)
+* [Cliff](https://en.wikipedia.org/wiki/Cliff_Barnes) Custom validation, e.g. calling a server method to check for an existing id, email taken etc. [Custom validation Telerik Forum](https://feedback.telerik.com/blazor/1447439-is-there-a-way-to-implement-custom-validation-in-a-blazor-telerik-grid-when-pressing-save-update-command-button-if-not-is-there-plans-on-providing-custom-validation-as-a-feature-in-the-near-future)
 
 ## License
 Telerik UI for Blazor [Licence](https://www.telerik.com/purchase/license-agreement/blazor-ui)

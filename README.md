@@ -2,9 +2,9 @@
 
 Testing the Blazor UI Grid inline editing for evaluation purposes.
 
-## Working app
+## Live app
 
-[On Azure](https://telerikgridtests.azurewebsites.net)
+[https://telerikgridtests.azurewebsites.net](https://telerikgridtests.azurewebsites.net)
 
 ## Issues
 

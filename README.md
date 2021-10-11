@@ -9,8 +9,13 @@ Testing the Blazor UI Grid inline editing for evaluation purposes.
 ## Issues
 
 * Grid virtualization not working with some cultures, e.g. sv-SE, fi-FI etc.
-* Right align a column header, on a numeric column, is way too tricky.
-* Seems a bit laggy responsively.
+
+        var culture = "sv-SE";
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
+        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+        
+* Right align a column header, on a numeric column, is way too tricky when not aligning every column in the grid. Requires a HeaderTemplate. 
+* Seems a bit laggy, probably due to the animations on Telerik components.
 
 ## License
-[Telerik](https://www.telerik.com/purchase/license-agreement/blazor-ui)
+Telerik UI for Blazor [Licence](https://www.telerik.com/purchase/license-agreement/blazor-ui)
